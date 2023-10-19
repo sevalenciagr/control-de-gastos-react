@@ -1,14 +1,32 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Mensaje from './Mensaje';
 import CerrarBtn from '../img/cerrar.svg'
 
 
-const Modal = ({setModal, animarModal, setAnimarModal, guardarGasto}) => {
+const Modal = ({
+    setModal, 
+    animarModal, 
+    setAnimarModal, 
+    guardarGasto, 
+    gastoEditar
+}) => {
 
     const [nombre, setNombre] = useState('');
     const [cantidad, setCantidad] = useState('');
     const [categoria, setCategoria] = useState('');
     const [mensaje, setMensaje] = useState('');
+    const [id, setId] = useState('')
+    const [ fecha, setFecha ] = useState('');
+    useEffect (() => {
+        if( Object.keys(gastoEditar).length > 0 ){
+            setNombre(gastoEditar.nombre);
+            setCantidad(gastoEditar.cantidad);
+            setCategoria(gastoEditar.categoria);
+            setId(gastoEditar.id);
+            setFecha(gastoEditar.fecha)
+
+          }
+    },[]);
 
     const ocultarModal = () => {
         setAnimarModal(false);
@@ -30,7 +48,7 @@ const Modal = ({setModal, animarModal, setAnimarModal, guardarGasto}) => {
             return;
         }
 
-        guardarGasto({ nombre, cantidad, categoria });
+        guardarGasto({ nombre, cantidad, categoria, id, fecha });
     };
 
   return (
@@ -47,7 +65,7 @@ const Modal = ({setModal, animarModal, setAnimarModal, guardarGasto}) => {
             onSubmit={handleSubmit}
             className={`formulario ${animarModal ? "animar" : "cerrar"}`}
         >
-            <legend>Nuevo Gasto</legend>
+            <legend>{gastoEditar.nombre ? 'Editar gasto' : 'Nuevo gasto'}</legend>
             {mensaje && <Mensaje tipo="error">{mensaje}</Mensaje>}
 
             <div className="campo">
@@ -95,7 +113,7 @@ const Modal = ({setModal, animarModal, setAnimarModal, guardarGasto}) => {
             </div>
             <input 
                 type="submit" 
-                value="Añadir gasto"
+                value={gastoEditar.nombre ? 'Guardar cambio' : 'Añadir gasto'}
             />
         </form>
     </div>
