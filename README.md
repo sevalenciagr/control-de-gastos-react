@@ -2,6 +2,8 @@
 
 Este es un proyecto de control de gastos personales desarrollado en React + Vite. La aplicación se enfoca en el uso de los principales hooks de React, como `useState` y `useEffect`, y utiliza el almacenamiento local (`localStorage`) para proporcionar persistencia de datos incluso después de recargar la página.
 
+![gastos](https://github.com/sevalenciagr/control-de-gastos-react/assets/88304046/42a0e79a-6978-4a3d-bcd2-791b0cfe7a3a)
+
 ## Demostración
 
 Puedes acceder a una versión desplegada de la aplicación [aquí](https://control-de-gastos-react-svg.vercel.app/).
